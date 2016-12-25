@@ -1,0 +1,1 @@
+{put({parameter s,c.local e is vcrs(s:up:vector,s:north:vector).local x is vdot(s:north:vector,c).local y is vdot(e,c).local r is arctan2(y,x).if r<0 return 360+r. return r.}).}
