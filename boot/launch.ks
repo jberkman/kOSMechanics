@@ -1,1 +1,1 @@
-@lazyglobal off.{set pilotMainThrottle to 0.local l is "1:/lib/dd.ks".if not exists(l) copyPath("0:/lib/dd.ks",l).runPath(l).get("lib/launch.ks")().}
+@lazyglobal off.{set ship:control:pilotMainThrottle to 0.local l is "1:/lib/dd.ks".if not exists(l) copyPath("0:/lib/dd.ks",l).runPath(l).get("lib/launch.ks")().}

@@ -1,0 +1,1 @@
+{put({local l is lex().for m in ship:modulesNamed("ModuleScienceExperiment"){if not m:inoperable and not m:hasData and not l:hasKey(m:part:name){m:deploy().set l[m:part:name] to 1.}}}).}
