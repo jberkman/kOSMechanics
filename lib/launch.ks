@@ -8,7 +8,7 @@
     s:add({
       sas on.
       if status="prelaunch"{
-        local t is 10.
+        local t is 30.
         until t < 0 {wait 1.hudText("T - "+t,0.9,2,-1,yellow,1).set t to t-1.}
         stage.
       }
@@ -60,5 +60,6 @@
     }
     s:add({wait until apoapsis>=a. next().}).
     s:add({lock throttle to 0.unlock steering.next().}).
+    if body:atm:exists s:add({wait until altitude>body:atm:height.next().}).
   })().
 }).}
