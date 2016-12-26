@@ -60,6 +60,6 @@
     }
     s:add({wait until apoapsis>=a. next().}).
     s:add({lock throttle to 0.unlock steering.next().}).
-    if body:atm:exists s:add({wait until altitude>body:atm:height.next().}).
+    if body:atm:exists s:add({wait until altitude>body:atm:height. next().}).
   })().
 }).}

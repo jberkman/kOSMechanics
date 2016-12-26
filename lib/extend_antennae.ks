@@ -1,0 +1,1 @@
+{put({for m in ship:modulesNamed("ModuleDeployableAntenna") if m:getField("status")<>"extended" m:doEvent("extend antenna").}).}
