@@ -1,0 +1,1 @@
+put({get("lib/hlog.ks")("Patched!").}).

@@ -1,1 +1,0 @@
-{local s is stack().local d is lex().global put is {parameter v.set d[s:pop()] to v.}.global get is {parameter n.if d:hasKey(n) return d[n].s:push(n).if not exists("1:/"+n)copyPath("0:/"+n,"1:/"+n).runPath("1:/"+n).return d[n].}.}

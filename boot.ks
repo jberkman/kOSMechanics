@@ -1,0 +1,1 @@
+{set ship:control:pilotMainThrottle to 0.local s is stack().local d is lex().global put is{parameter v.set d[s:pop()]to v.}.global get is{parameter r,l is r. if d:hasKey(r)return d[r].s:push(r).if not exists("1:/"+l)copyPath("0:/"+r,"1:/"+l).runPath("1:/"+l).return d[r].}.}

@@ -1,0 +1,1 @@
+put({for m in ship:modulesNamed("ModuleDeployableAntenna") if m:hasEvent("extend antenna") m:doEvent("extend antenna").}).

@@ -1,4 +1,4 @@
-{put({parameter a is body:atm:height+10000, i is 0, pr is 0.6.
+put({parameter a is body:atm:height+10000, i is 0, pr is 0.6.
   local clamp is get("lib/clamp.ks").
   local compassForVec is get("lib/compass_for_vec.ks").
   local hlog is get("lib/hlog.ks").
@@ -62,4 +62,4 @@
     s:add({lock throttle to 0.unlock steering.next().}).
     if body:atm:exists s:add({wait until altitude>body:atm:height. next().}).
   })().
-}).}
+}).

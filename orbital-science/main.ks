@@ -1,6 +1,6 @@
-{put({
-  local e is get("lib/extend_antennae.ks").
-  local s is get("lib/record_science.ks").
+put({
+  local e is get("lib/extend-antennae.ks").
+  local s is get("lib/record-science.ks").
   if status <> "prelaunch" return.
   wait until altitude>body:atm:height.
   wait 5. stage.
@@ -16,4 +16,4 @@
   wait until maxThrust<1 or periapsis>a.
   lock throttle to 0.
   unlock steering.
-}).}
+}).
