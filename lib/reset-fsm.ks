@@ -1,0 +1,1 @@
+put({deletePath("1:/fsm.state.ks").}).

@@ -1,0 +1,1 @@
+put({parameter o,h,a is o:obt:semiMajorAxis. local r is h+o:body:radius. return sqrt(o:body:mu*(2/r-1/a)).}).

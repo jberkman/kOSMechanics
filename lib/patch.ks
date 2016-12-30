@@ -1,1 +1,1 @@
-put({parameter m,r is 0. copyPath("0:/"+m,"1:/main.ks").if r deletePath("1:/fsm.state.ks").}).
+put({parameter r,l is r. copyPath("0:/"+r,"1:/"+l).}).

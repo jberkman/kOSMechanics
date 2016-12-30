@@ -1,5 +1,5 @@
 @lazyglobal off.
-parameter vesselName, patchSrc, patchDst is patchSrc.
+parameter vesselName, command, args is list().
 {
   function send {
     parameter dst, msg.
@@ -9,7 +9,7 @@ parameter vesselName, patchSrc, patchDst is patchSrc.
   }
   runPath("boot.ks").
   local hlog is get("lib/hlog.ks").
-  local msg is list("lib/patch.ks", list(patchSrc, patchDst)).
-  if send(vesselName, msg) hlog("Patch sent succesfully.").
-  else hlog("Unable to send patch.").
+  local msg is list(command, args).
+  if send(vesselName, msg) hlog("Command sent succesfully.").
+  else hlog("Unable to send command.").
 }
