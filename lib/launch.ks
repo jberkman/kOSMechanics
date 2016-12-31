@@ -14,8 +14,9 @@
 
     hlog("Ignition!").
     lock throttle to 1-(0.999*apoapsis/(a+body:radius)).
-    wait until verticalSpeed>1.
-
+    local timeout is time:seconds+3.
+    wait until verticalSpeed>1 or time:seconds>timeout.
+    if verticalSpeed<1 stage.
     hlog("Liftoff!").
     local rollAt is alt:radar.
     until alt:radar>rollAt+60.

@@ -1,1 +1,1 @@
-put({parameter t is 0.local l is lex().for m in ship:modulesNamed("ModuleScienceExperiment"){if not m:inoperable and not m:hasData and not l:hasKey(m:part:name){m:deploy().if t{wait until m:hasData. m:transmit().}.set l[m:part:name] to 1.}}}).
+put({parameter t is 0.local l is lex().for m in ship:modulesNamed("ModuleScienceExperiment"){if not m:inoperable and not m:hasData and not l:hasKey(m:part:name){m:deploy().if t{wait until m:hasData. wait 1.m:transmit().}.set l[m:part:name] to 1.}}}).
