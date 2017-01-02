@@ -1,0 +1,1 @@
+put({parameter lan. return mod(720+lan-longitude-body:rotationAngle,360)*body:rotationPeriod/360.}).

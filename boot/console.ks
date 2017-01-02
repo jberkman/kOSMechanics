@@ -1,0 +1,1 @@
+@lazyglobal off.{core:doEvent("Open Terminal").}

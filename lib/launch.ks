@@ -1,17 +1,12 @@
 {
+  local countdown is get("lib/countdown.ks").
   local clamp is get("lib/clamp.ks").
   local vecHdg is get("lib/compass-for-vec.ks").
   local hlog is get("lib/hlog.ks").
   put({parameter a is body:atm:height+10000, i is 0, pr is 0.6.
     local z is arcsin(clamp(cos(i)/cos(latitude),-1,1)).
-
     sas on.
-    if status="prelaunch"{
-      local t is 30.
-      until t<0 {wait 1.hudText("T - "+t,0.9,2,-1,yellow,1).set t to t-1.}
-      stage.
-    }
-
+    if status="prelaunch"{countdown("T - ",30).stage.}
     hlog("Ignition!").
     lock throttle to 1-(0.999*apoapsis/(a+body:radius)).
     local timeout is time:seconds+3.

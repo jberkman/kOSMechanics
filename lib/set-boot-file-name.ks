@@ -1,0 +1,1 @@
+put({parameter n. set core:bootFileName to n.}).

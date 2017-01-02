@@ -1,0 +1,1 @@
+put({until not hasNode{remove nextNode. wait 0.}}).
