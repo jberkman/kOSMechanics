@@ -42,7 +42,7 @@
       lock lookAt to heading(z,22.5):vector.next().
     }
     
-    wait until apoapsis>=a.
+    wait until apoapsis>=a or(ship:maxThrust<0.1 and altitude>body:atm:height).
     lock throttle to 0.
     wait until altitude>body:atm:height.
     unlock steering.

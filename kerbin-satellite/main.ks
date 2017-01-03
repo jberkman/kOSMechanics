@@ -43,8 +43,9 @@
       }).
       seq:add({
         l("Boosting into final orbit.").idle().
-        local nd is aopNode().add nd. wait 0. ex().next().}).
-      }
+        local nd is aopNode().add nd. wait 0. ex().
+        next().
+      }).
       seq:add({idle().wait until not ship:messages:empty.}).
     })().
   }).
