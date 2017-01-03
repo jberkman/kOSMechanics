@@ -1,1 +1,0 @@
-put({get("lib/hlog.ks")("Unpatched.").}).
