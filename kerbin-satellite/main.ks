@@ -2,6 +2,7 @@
   local burn is get("lib/sma-burn.v2.ks").
   local ex is get("lib/exec-node.ks").
   local fsm is get("lib/fsm.ks").
+  local l is get("lib/hlog.ks").
   local sk is get("lib/find-node.ks").
   put({parameter apo,peri,aop,idle.
     fsm({parameter seq,ev,next.
@@ -21,12 +22,29 @@
         return sk(list(time:seconds+nd:eta+obt:period),mknd@,eval@).
       }
       seq:add({wait until ship:modulesNamed("kOSProcessor"):length=1 and altitude>body:atm:height. wait 10. next().}).
-      if aop<0 seq:add({idle().burn(time:seconds+eta:apoapsis,(apoapsis+apo)/2+body:radius).next().}).
-      else{
-        seq:add({idle().burn(time:seconds+eta:apoapsis,apoapsis+body:radius).next().}).
-        seq:add({idle().local nd is aopNode().add nd. wait 0. ex().next().}).
+      seq:add({
+        if apoapsis<0.99*peri and periapsis<body:atm:height{
+          l("Boosting into stable orbit.").idle().
+          burn(time:seconds+eta:apoapsis,(apoapsis+body:atm:height+10000)/2+body:radius).
+        }
+        next().
+      }).
+      seq:add({
+        if apoapsis<0.99*peri{
+          l("Boosting into transfer orbit.").idle().
+          burn(time:seconds+eta:periapsis,(periapsis+peri)/2+body:radius).
+        }
+        next().
+      }).
+      seq:add({
+        l("Boosting into parking orbit.").idle().
+        burn(time:seconds+eta:apoapsis,apoapsis+body:radius).
+        next().
+      }).
+      seq:add({
+        l("Boosting into final orbit.").idle().
+        local nd is aopNode().add nd. wait 0. ex().next().}).
       }
-      seq:add({idle().burn(time:seconds+eta:apoapsis,(apoapsis+peri)/2+body:radius).next().}).
       seq:add({idle().wait until not ship:messages:empty.}).
     })().
   }).
