@@ -44,6 +44,7 @@
     
     wait until apoapsis>=a or(ship:maxThrust<0.1 and altitude>body:atm:height).
     lock throttle to 0.
+    lock steering to lookDirUp(ship:velocity:orbit,-up:vector).
     wait until altitude>body:atm:height.
     unlock steering.
   }).

@@ -1,0 +1,1 @@
+@lazyglobal off.{local l is "1:/boot.ks".if not exists(l)copyPath("0:/boot.ks",l).runPath(l).get("init.ks")("kerbin-satellite/main.ks")(4923214,4209430,333.6,{lock steering to lookDirUp(north:vector,-sun:position).}).}
