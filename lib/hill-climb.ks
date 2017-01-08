@@ -2,13 +2,14 @@
 {
   function nb{parameter nd,st.
     local rt is list().local i is 0.until i=nd:length{
-      local x is nd:copy. set x[i]to nd[i]-st. rt:add(x).
-      set x to nd:copy. set x[i]to nd[i]+st. rt:add(x).
+      if st[i]<>0{
+        local x is nd:copy. set x[i]to nd[i]-st[i]. rt:add(x).
+        set x to nd:copy. set x[i]to nd[i]+st[i]. rt:add(x).
+      }
       set i to i+1.
-    }
-    return rt.
+    }return rt.
   }
-  put({parameter nd,ev,st is 1.
+  put({parameter nd,st,ev.
     local sc is ev(nd).local dn is 0.until dn{
       set dn to 1.for n in nb(nd,st){
         local new is ev(n).
