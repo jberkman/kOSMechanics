@@ -1,0 +1,1 @@
+put({parameter o,b.until o:body=b{if not o:hasNextPatch return 0. set o to o:nextPatch.}return 1.}).

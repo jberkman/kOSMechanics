@@ -1,0 +1,1 @@
+put({parameter i is 0.return{parameter n.return-abs(n:obt:inclination-i).}.}).

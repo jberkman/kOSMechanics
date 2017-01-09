@@ -3,7 +3,7 @@
   local hc is get("lib/hill-climb.ks").
   local l2n is get("lib/list-to-node.ks").
   local n2l is get("lib/node-to-list.ks").
-  put({parameter nd,st,ev,i is 3.
+  put({parameter nd,st,ev,i is 4.
     local x is n2l(nd).set st to st:copy.
     until i=0{
       set x to hc(x,st,{parameter x.

@@ -1,0 +1,1 @@
+put({parameter a,p.return{parameter n.return-abs(n:obt:apoapsis-a)-abs(n:obt:periapsis-p).}.}).

@@ -1,0 +1,1 @@
+put({parameter e is 0.return{parameter n.return-abs(n:obt:eccentricity-e).}.}).

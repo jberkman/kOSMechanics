@@ -1,9 +1,11 @@
 {
-  local c is get("lib/circularize.ks").
-  local d is get("lib/deorbit.ks").
+  local exec is get("lib/exec-node.ks").
+  local find is get("lib/find-node.ks").
+  local findEcc is get("lib/finders/eccentricity.ks").
+  local findPeri is get("lib/finders/periapsis.ks").
   local fsm is get("lib/fsm.ks").
   local l is get("lib/hlog.ks").
-  local u is get("lib/kill-warp.ks").
+  local killWarp is get("lib/kill-warp.ks").
   put({parameter orbits,emptySeats is 0.
     fsm({parameter seq,ev,next.
       seq:add({
@@ -14,7 +16,7 @@
       }).
       seq:add({
         l("Circularizing...").
-        c().
+        exec(find(Node(time:seconds+eta:apoapsis,0,0,0),List(0,0,0,100),findEcc())).
         next().
       }).
       local i is 0. until i=orbits{seq:add({
@@ -26,10 +28,10 @@
       }
       seq:add({
         l("Please return onboard for deorbiting.").
-        u().
+        killWarp().
         wait until ship:crewCapacity=ship:crew():length+emptySeats.
         l("Scheduling deorbit burn in 120 seconds.").
-        d(time:seconds+120).
+        exec(find(Node(time:seconds+120,0,0,-100),List(0,0,0,10),findPeri(30000))).
         next().
       }).
       seq:add({wait 10. stage. next().}).
