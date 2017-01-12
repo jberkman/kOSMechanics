@@ -10,6 +10,7 @@
     return lex(
       "add",{parameter g_,e_,f_.g:add(g_).e:add(e_).f:add(f_).},
       "seek",{parameter nd,st,m is{parameter x.return x.}.
+        print g.
         local n is g:length. local y is list().local ch is lex(""+nd,1).local mx is m(nd).
         local i is 0.until i=n{y:add(abs(f[i](mx)-g[i])).set i to i+1.}
         local dn is 0.until dn{
@@ -17,11 +18,12 @@
           for x in nb(nd,st,ch){
             set mx to m(x).local z is list().local i is 0.until i=n{
               local v is abs(f[i](mx)-g[i]).
-              if v>y[i] and v>e[i]break.
-              if v<y[i] set dn to 0.
+              //print "v: "+round(v,2)+" e: "+round(e[i],2).
+              if v>e[i]and v>y[i] break.
+              if v>e[i]and v<y[i] set dn to 0.
               z:add(v).set i to i+1.
             }
-            if z:length=n{set nd to x. set y to z.}
+            if z:length=n and not dn{set nd to x. set y to z.}
             set ch[""+x]to 1.
           }
         }
