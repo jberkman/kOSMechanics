@@ -33,13 +33,12 @@
         local hc is seek().
         hc["add"](dst:obt:semiMajorAxis-body:radius,0,{parameter n.return n:obt:apoapsis.}).
         local dn0 is find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)).
-        set dn0:eta to 0.
         set hc to seek().
         hc["add"](dst:radius*0.9,0,findXfer(dst)).
         until 0{
-          set dn0:eta to dn0:eta+obt:period/3.
-          local dn is find(hc,dn0,List(obt:period/36,10,10,10)).
-          add dn. if x2(dn:obt,dst)break.
+          set dn0:eta to random()*obt:period.
+          add find(hc,dn0,List(obt:period/36,10,10,10)).
+          if x2(nextNode:obt,dst)break.
         }
         exec().next().
       }).
