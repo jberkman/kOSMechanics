@@ -1,9 +1,8 @@
 {
   local bt is get("lib/burn-time.ks").
   local kw is get("lib/kill-warp.ks").
-  put({
-    parameter node is nextNode.
-    if not hasNode add node.
+  put({parameter node is nextNode.
+    wait 0. if not hasNode add node.
     local lock nbt to bt(node:deltaV:mag).
     local lock t to node:eta-nbt/2.
     wait until t<30. kw().
