@@ -1,0 +1,1 @@
+put({parameter t.return(positionAt(ship,t)-body:position):mag.}).

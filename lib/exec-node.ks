@@ -3,10 +3,10 @@
   local kw is get("lib/kill-warp.ks").
   put({
     parameter node is nextNode.
-    add node.
+    if not hasNode add node.
     local lock nbt to bt(node:deltaV:mag).
     local lock t to node:eta-nbt/2.
-    wait until t<60. kw().
+    wait until t<30. kw().
     lock steering to lookDirUp(node:deltaV,-up:vector).
     wait until t<0. kw().
     local v is node:deltaV.

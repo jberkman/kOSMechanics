@@ -1,0 +1,1 @@
+{local a is get("lib/altitude-at.ks").put({parameter h.return{parameter n.local inf is 2^64.if n:eta<0 return -2^64.return-abs(a(time:seconds+n:eta)-h).}.}).}

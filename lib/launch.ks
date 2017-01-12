@@ -16,7 +16,7 @@
     local rollAt is alt:radar.
     until alt:radar>rollAt+60.
     sas off.
-    function hdg{parameter v.return 3*arcsin(clamp(cos(i)/cos(latitude),-1,1))-2*vecHdg(ship,v).}
+    function hdg{parameter v.return 10*arcsin(clamp(cos(i)/cos(latitude),-1,1))-9*vecHdg(ship,v).}
 
     if body:atm:exists{
       global launchPC to time:seconds.
