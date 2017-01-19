@@ -25,7 +25,7 @@
         l("Circularizing parking orbit").
         local hc is seek().
         hc["add"](0,0,{parameter n.return n:obt:eccentricity.}).
-        exec(find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100))).
+        exec(find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)),1).
         next().
       }).
       seq:add({
@@ -40,7 +40,7 @@
           add find(hc,dn0,List(obt:period/36,10,10,10)).
           if x2(nextNode:obt,dst)break.
         }
-        exec().next().
+        exec(nextNode,1).next().
       }).
     })().
   }).

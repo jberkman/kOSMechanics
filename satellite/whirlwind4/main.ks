@@ -6,6 +6,7 @@
   local fsm is get("lib/fsm.ks").
   local gss is get("lib/golden-section-search.ks").
   local l is get("lib/hlog.ks").
+  local science is get("lib/record-science.ks").
   local seek is get("lib/hill-climb.v2.ks").
   local unwarp is get("lib/kill-warp.ks").
   local x2 is get("lib/transfers-to.ks").
@@ -51,6 +52,7 @@
         wait until body=dst.
         unwarp().next().
       }).
+      seq:add({science(1).next().}).
       seq:add({
         l("Adjusting intercept").idle().
         local hc is seek().
@@ -89,7 +91,7 @@
       seq:add({
         l("Performing final adjustment").idle().
         local hc is seek().
-        hc["add"](aop,0.5,{parameter n.return n:obt:argumentOfPeriapsis.}).
+        hc["add"](aop,0.1,{parameter n.return n:obt:argumentOfPeriapsis.}).
         local nd is find(hc,Node(time:seconds+obt:period/2,0,0,-obt:velocity:orbit:mag/2),List(obt:period/36,0,0,0)).
         hc["add"](peri,0.005*peri,{parameter n.return n:obt:periapsis.}).
         set nd:prograde to 0.

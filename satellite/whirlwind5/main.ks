@@ -6,6 +6,7 @@
   local fsm is get("lib/fsm.ks").
   local gss is get("lib/golden-section-search.ks").
   local l is get("lib/hlog.ks").
+  local science is get("lib/record-science.ks").
   local seek is get("lib/hill-climb.v2.ks").
   local unwarp is get("lib/kill-warp.ks").
   local x2 is get("lib/transfers-to.ks").
@@ -45,6 +46,7 @@
         exec(find(hc,nd,List(0,10,10,10)),1).
         next().
       }).
+      seq:add({science(1).next().}).
       seq:add({
         l("Coasting to SOI change").idle().
         if 1 warpTo(time:seconds+xferETA(obt,dst)-30).
@@ -89,9 +91,33 @@
       seq:add({
         l("Performing final adjustment").idle().
         local hc is seek().
+        hc["add"](aop,0.1,{parameter n.return n:obt:argumentOfPeriapsis.}).
+        local nd is find(hc,Node(time:seconds+obt:period/2,0,0,-obt:velocity:orbit:mag/2),List(obt:period/36,0,0,0)).
+        hc["add"](peri,0.001*peri,{parameter n.return n:obt:periapsis.}).
+        set nd:prograde to 0.
+        set nd to find(hc,nd,List(0,0,0,10)).
+        if nd:eta<30 set nd:eta to nd:eta+obt:period.
+        exec(nd,1).
+        next().
+      }).
+      seq:add({
+        l("Performing final adjustment").idle().
+        local hc is seek().
+        hc["add"](aop,0.1,{parameter n.return n:obt:argumentOfPeriapsis.}).
+        local nd is find(hc,Node(time:seconds+obt:period/2,0,0,-obt:velocity:orbit:mag/2),List(obt:period/36,0,0,0)).
+        hc["add"](peri,0.001*peri,{parameter n.return n:obt:periapsis.}).
+        set nd:prograde to 0.
+        set nd to find(hc,nd,List(0,0,0,10)).
+        if nd:eta<30 set nd:eta to nd:eta+obt:period.
+        exec(nd,1).
+        next().
+      }).
+      seq:add({
+        l("Performing final adjustment").idle().
+        local hc is seek().
         hc["add"](aop,0.5,{parameter n.return n:obt:argumentOfPeriapsis.}).
         local nd is find(hc,Node(time:seconds+obt:period/2,0,0,-obt:velocity:orbit:mag/2),List(obt:period/36,0,0,0)).
-        hc["add"](peri,0.005*peri,{parameter n.return n:obt:periapsis.}).
+        hc["add"](peri,0,{parameter n. print round(peri/1000)+" "+round(n:obt:periapsis/1000). return n:obt:periapsis.}).
         set nd:prograde to 0.
         set nd to find(hc,nd,List(0,0,0,10)).
         if nd:eta<30 set nd:eta to nd:eta+obt:period.
