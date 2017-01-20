@@ -41,7 +41,6 @@
       wait until apoapsis>altitude+1000-alt:radar.
       lock lookAt to heading(hdg(ship:velocity:orbit),22.5):vector.next().
     }
-    
     wait until apoapsis>=a or(ship:maxThrust<0.1 and altitude>body:atm:height).
     lock throttle to 0.
     local el is false.
