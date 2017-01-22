@@ -1,0 +1,1 @@
+put(get("missions/"+ship:name+".ks","mission.ks")).

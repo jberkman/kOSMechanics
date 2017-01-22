@@ -1,0 +1,1 @@
+{local c is get("lib/countdown.ks").local e is get("lib/eta-to-lan.ks").put({parameter l.c("Warping to LAN in ",15).warpTo(time:seconds-30+e(l)).}).}

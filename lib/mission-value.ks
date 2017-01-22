@@ -1,0 +1,1 @@
+put({parameter m,k,v. if m:hasKey(k)return m[k]. return v.}).

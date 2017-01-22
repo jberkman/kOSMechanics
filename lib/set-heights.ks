@@ -4,8 +4,8 @@
   local sk is get("lib/hill-climb.v2.ks").
   put({parameter t,apo,peri,w.
     local hc is sk().
-    hc["add"](apo,0.001*apo,{parameter n.return n:obt:apoapsis.}).
-    hc["add"](peri,0.001*peri,{parameter n.return n:obt:periapsis.}).
+    hc["add"](apo,max(500,0.001*apo),{parameter n.return n:obt:apoapsis.}).
+    hc["add"](peri,max(500,0.001*peri),{parameter n.return n:obt:periapsis.}).
     ex(fi(hc,Node(t,0,0,0),List(0,1,0,10)),w).
   }).
 }
