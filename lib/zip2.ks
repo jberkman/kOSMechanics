@@ -1,0 +1,1 @@
+put({parameter a,b.local r is List().local i is 0.until i=a:length{r:add(List(a[i],b[i])).set i to i+1.}return r.}).

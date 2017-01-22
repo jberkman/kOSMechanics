@@ -1,0 +1,1 @@
+{local e is 1. until 1+e/2=1 set e to e/2. put(e)}

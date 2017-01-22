@@ -35,20 +35,20 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     local x2 is get("lib/transfers-to.ks").
     seq:add({h("Circularizing parking orbit").
       local hc is seek().
-      hc["add"](0,0,{parameter n.return n:obt:eccentricity.}).
+      hc["add"](0,0.02,{parameter n.print n:obt:eccentricity. return n:obt:eccentricity.}).
       exec(find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)),1).
       next().
     }).
     local findXfer is get("lib/finders.v2/closest-approach.ks").
     seq:add({h("Performing transfer").
       local hc is seek().
-      hc["add"](b:obt:semiMajorAxis-body:radius,0,{parameter n.return n:obt:apoapsis.}).
-      local dn0 is find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)).
+      hc["add"](b:obt:semiMajorAxis-body:radius,b:radius,{parameter n.return n:obt:apoapsis.}).
+      local dn0 is find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100),5).
       set hc to seek().
-      hc["add"](b:radius/2,0,findXfer(b)).
+      hc["add"](b:radius/2,1000,findXfer(b)).
       until 0{
         set dn0:eta to random()*obt:period.
-        add find(hc,dn0,List(obt:period/36,10,10,10)).
+        add find(hc,dn0,List(obt:period/36,10,10,10),2).
         if nextNode:eta>180 and x2(nextNode:obt,b)break.
       }
       exec(nextNode,1).next().

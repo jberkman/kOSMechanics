@@ -1,31 +1,52 @@
 // Inspired by Kevin Gisi http://youtube.com/gisikw
 {
-  function nb{parameter nd,st,ch.
-    function it{parameter nd.local x is nd:copy. set x[i]to nd[i]-st[i]. if not ch:hasKey(""+x)rt:add(x).set x to nd:copy. set x[i]to nd[i]+st[i]. if not ch:hasKey(""+x)rt:add(x).}
-    local rt is list().local i is 0.until i=nd:length{if st[i]<>0{for j in rt:copy it(j).it(nd).}set i to i+1.}return rt.}
-  put({
-    local g is list().
-    local e is list().
-    local f is list().
+  local map is get("lib/map.ks").
+  local reduce is get("lib/reduce.ks").
+  local zip2 is get("lib/zip2.ks").
+  local zip3 is get("lib/zip3.ks").
+  put({local gef is List().
     return lex(
-      "add",{parameter g_,e_,f_.g:add(g_).e:add(e_).f:add(f_).},
-      "seek",{parameter nd,st,m is{parameter x.return x.}.
-        local n is g:length. local y is list().local ch is lex(""+nd,1).local mx is m(nd).
-        local i is 0.until i=n{y:add(abs(f[i](mx)-g[i])).set i to i+1.}
-        local dn is 0.until dn{
-          set dn to 1.
-          for x in nb(nd,st,ch){
-            set mx to m(x).local z is list().local i is 0.until i=n{
-              local v is abs(f[i](mx)-g[i]).
-              if v>e[i]and v>y[i] break.
-              if v>e[i]and v<y[i] set dn to 0.
-              z:add(v).set i to i+1.
-            }
-            if z:length=n and not dn{set nd to x. set y to z.}
-            set ch[""+x]to 1.
-          }
+      "add",{parameter g,e,f.gef:add(List(g,e,f)).},
+      "seek",{parameter p,s,m is{parameter x.return x.},ac is 2.
+        local a is list(-ac,-1/ac,0,1/ac,ac).
+        local n is gef:length.
+        function eval{parameter x.return map(gef,{parameter gef.return abs(gef[2](x)-gef[0]).}).}
+        function beats{parameter l,r.
+          local x is map(zip3(l,r,gef),{parameter x.
+            if x[0]<x[1]return 1.
+            if x[0]=x[1]or x[0]<=x[2][1]return 0.
+            return -1.
+          }).
+          return 1=reduce(x,0,{parameter v,x.
+            if v=-1 or x=-1 return-1.
+            if v=1 or x=1 return 1.
+            return 0.
+          }).
         }
-        return nd.
+        until 0{
+          local score is eval(m(p)).
+          local i is 0.until i=p:length{if s[i]<>0{
+            local best is-1.
+            local j is 0.until j=5{
+              local t is p[i].
+              set p[i]to p[i]+s[i]*a[j].
+              local cur is eval(m(p)).
+              set p[i]to t.
+              if beats(cur,score){
+                set best to j.
+                set score to cur.
+              }
+              set j to j+1.
+            }
+            if best<0 or a[best]=0 set s[i]to s[i]/ac.
+            else{
+              set s[i]to s[i]*a[best].
+              set p[i]to p[i]+s[i].
+            }
+            }set i to i+1.
+          }
+          if reduce(zip2(score,gef),1,{parameter v,x.return v and x[0]<x[1][1].})return p.
+        }
       }
     ).
   }).

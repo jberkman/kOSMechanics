@@ -1,0 +1,1 @@
+put({parameter l,v,f.for i in l set v to f(v,i).return v.}).
