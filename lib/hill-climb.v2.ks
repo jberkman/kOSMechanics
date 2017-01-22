@@ -23,8 +23,8 @@
             return 0.
           }).
         }
-        until 0{
-          local score is eval(m(p)).
+        local score is eval(m(p)).
+        until reduce(zip2(score,gef),1,{parameter v,x.return v and x[0]<x[1][1].}){
           local i is 0.until i=p:length{if s[i]<>0{
             local best is-1.
             local j is 0.until j=5{
@@ -45,8 +45,8 @@
             }
             }set i to i+1.
           }
-          if reduce(zip2(score,gef),1,{parameter v,x.return v and x[0]<x[1][1].})return p.
         }
+        return p.
       }
     ).
   }).
