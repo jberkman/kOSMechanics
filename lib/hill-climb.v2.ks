@@ -1,20 +1,20 @@
 // Inspired by Kevin Gisi http://youtube.com/gisikw
 {
+  local enumerate is get("lib/enumerate.ks").
   local map is get("lib/map.ks").
   local reduce is get("lib/reduce.ks").
-  local zip2 is get("lib/zip2.ks").
-  local zip3 is get("lib/zip3.ks").
-  put({local gef is List().
+  put({local g is List(). local e is List(). local f is List().
     return lex(
-      "add",{parameter g,e,f.gef:add(List(g,e,f)).},
+      "add",{parameter g_,e_,f_.g:add(g_). e:add(e_). f:add(f_).},
       "seek",{parameter p,s,m is{parameter x.return x.},ac is 2.
         local a is list(-ac,-1/ac,0,1/ac,ac).
-        local n is gef:length.
-        function eval{parameter x.return map(gef,{parameter gef.return abs(gef[2](x)-gef[0]).}).}
+        local n is g:length.
+        function eval{parameter x.return map(enumerate(f),{parameter iv.return abs(iv[1](x)-g[iv[0]]).}).}
         function beats{parameter l,r.
-          local x is map(zip3(l,r,gef),{parameter x.
-            if x[0]<x[1]return 1.
-            if x[0]=x[1]or x[0]<=x[2][1]return 0.
+          local x is map(enumerate(l),{parameter x.
+            local i is x[0]. local v is x[1].
+            if v<r[i]return 1.
+            if v=r[i]or v<=e[i]return 0.
             return -1.
           }).
           return 1=reduce(x,0,{parameter v,x.
@@ -24,7 +24,7 @@
           }).
         }
         local score is eval(m(p)).
-        until reduce(zip2(score,gef),1,{parameter v,x.return v and x[0]<x[1][1].}){
+        until reduce(enumerate(score),1,{parameter v,iv.return v and iv[1]<e[iv[0]].}){
           local i is 0.until i=p:length{if s[i]<>0{
             local best is-1.
             local j is 0.until j=5{
