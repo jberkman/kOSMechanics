@@ -28,31 +28,29 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     seq:add({if periapsis<30000 setH(time:seconds+eta:apoapsis-60,a,30000,1).next().}).
   }
   if b<>Kerbin{
-    local exec is get("lib/exec-node.ks").
+    local exec is get("lib/exec-node-state.ks"):bind(next,1).
     local find is get("lib/find-node.v2.ks").
     local h is get("lib/hlog.ks").
     local seek is get("lib/hill-climb.v2.ks").
     local x2 is get("lib/transfers-to.ks").
     seq:add({h("Circularizing parking orbit").
       local hc is seek().
-      hc["add"](0,0.02,{parameter n.print n:obt:eccentricity. return n:obt:eccentricity.}).
-      exec(find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)),1).
+      hc["add"](0,0.001,{parameter n.print n:obt:eccentricity. return n:obt:eccentricity.}).
+      add find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)).
       next().
     }).
+    seq:add(exec@).
     local findXfer is get("lib/finders.v2/closest-approach.ks").
     seq:add({h("Performing transfer").
       local hc is seek().
-      hc["add"](b:obt:semiMajorAxis-body:radius,b:radius,{parameter n.return n:obt:apoapsis.}).
-      local dn0 is find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100),5).
-      set hc to seek().
-      hc["add"](b:radius/2,1000,findXfer(b)).
-      until 0{
-        set dn0:eta to random()*obt:period.
-        add find(hc,dn0,List(obt:period/36,10,10,10),2).
-        if nextNode:eta>180 and x2(nextNode:obt,b)break.
+      hc["add"](b:SOIRadius/3,b:SOIRadius/3,findXfer(b)).
+      until hasNode and nextNode:eta>180 and x2(nextNode:obt,b){
+        add find(hc,Node(time:seconds+(0.1+random())*obt:period,0,0,100),List(obt:period/5,10,10,100)).
+        wait 0.
       }
-      exec(nextNode,1).next().
+      next().
     }).
+    seq:add(exec@).
   }
   if v(m,"launch.stage",1)seq:add({stage. next().}).
   if v(m,"launch.deorbit",0)seq:add({next().}).

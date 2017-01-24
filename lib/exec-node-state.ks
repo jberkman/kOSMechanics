@@ -1,0 +1,1 @@
+{local l is get("lib/hlog.ks").local e is get("lib/exec-node.ks").put({parameter n, w is 0.if not hasNode{n(-1).return.}l("Performing next burn").e(nextNode,w).n().}).}

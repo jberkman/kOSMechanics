@@ -44,6 +44,7 @@
               set p[i]to p[i]+s[i].
             }
             }set i to i+1.
+            print s.
           }
         }
         return p.
