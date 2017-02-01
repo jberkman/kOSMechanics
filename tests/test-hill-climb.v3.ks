@@ -4,7 +4,7 @@
   global put is{parameter v.set d[s:pop()]to v.}.
   global get is{parameter r,l is r. if d:hasKey(r)return d[r].s:push(r).runPath("0:/"+l).return d[r].}.
 
-  local seek is get("lib/hill-climb.v2.ks").
+  local seek is get("lib/hill-climb.v3.ks").
   {
     local hc is seek().
     hc["add"](0,0.1,{parameter x.return-x[0]^2.}).

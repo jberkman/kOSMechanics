@@ -1,0 +1,1 @@
+put({parameter m.return mod(floor(random()*(m)),m).}).

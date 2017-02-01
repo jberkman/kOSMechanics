@@ -13,15 +13,15 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
   local lock tApo to time:seconds+eta:apoapsis.
   local lock tPeri to time:seconds+eta:periapsis.
   local exec is get("lib/exec-node-state.ks"):bind(next,1).
-  local find is get("lib/find-node.v2.ks").
-  local seek is get("lib/hill-climb.v2.ks").
+  local find is get("lib/find-node.v3.ks").
+  local seek is get("lib/hill-climb.v3.ks").
   seq:add({l("Ready to launch").wait until ship:modulesNamed("kOSProcessor"):length=1 and altitude>body:atm:height. wait 10. next().}).
   if b=Kerbin{
     seq:add({
       if periapsis>body:atm:height or abs(apoapsis-peri)<0.005*peri{next().next().return.}
       l("Raising periapsis").
       local hc is seek().
-      hc["add"](b:atm:height+10000,100,{parameter n.return n:obt:periapsis.}).
+      hc["add"](b:atm:height+10000,1000,{parameter n.return n:obt:periapsis.}).
       add find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)).
       next().
     }).
@@ -30,7 +30,7 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       if abs(apoapsis-peri)<0.005*peri{next().next().return.}
       l("Raising apoapsis").
       local hc is seek().
-      hc["add"](peri,100,{parameter n.return n:obt:apoapsis.}).
+      hc["add"](peri,1000,{parameter n.return n:obt:apoapsis.}).
       add find(hc,Node(time:seconds+eta:periapsis,0,0,100),List(0,0,0,100)).
       next().
     }).
@@ -38,7 +38,7 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     seq:add({
       l("Circularizing to parking orbit").
       local hc is seek().
-      hc["add"](0,0.0001,{parameter n.return n:obt:eccentricity.}).
+      hc["add"](0,0.005,{parameter n.return n:obt:eccentricity.}).
       add find(hc,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)).
       next().
     }).
@@ -71,13 +71,11 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
         set nd to Node(gss(time:seconds,time:seconds+t,60,{parameter t.return abs(altAt(t)-h).}),0,0,0).
       }
       if nd:eta<0 next().
-      set hc to seek().
+      local hc is seek().
       hc["add"](inc,30,xferMap(b,{parameter o.return o:inclination.})).
-      set nd to find(hc,nd,List(0,10,10,10)).
-      hc["add"](apo,100,xferMap(b,{parameter o.return o:periapsis.})).
-      set nd to find(hc,nd,List(0,10,10,10)).
-      hc["add"](90,0.1,xferMap(b,{parameter o.return abs(mod(o:argumentOfPeriapsis,180)-90).})).
-      add find(hc,nd,List(0,10,10,10)).
+      hc["add"](apo,apo*0.01,xferMap(b,{parameter o.return o:periapsis.})).
+      hc["add"](90,1,xferMap(b,{parameter o.local r is abs(mod(o:argumentOfPeriapsis,180)-90).print r. return r.})).
+      add find(hc,nd,List(0,10,10,0)).
       next().
     }).
     seq:add(exec@).
@@ -93,22 +91,20 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       l("Adjusting intercept").idle().
       local hc is seek().
       hc["add"](inc,30,{parameter n.return n:obt:inclination.}).
-      local nd is find(hc,Node(time:seconds+180,0,0,0),List(0,10,10,0)).
-      hc["add"](apo,100,{parameter n.return n:obt:periapsis.}).
-      set nd to find(hc,nd,List(0,10,10,0)).
-      hc["add"](90,0.1,xferMap(b,{parameter o.return abs(mod(o:argumentOfPeriapsis,180)-90).})).
-      add find(hc,nd,List(0,10,10,0)).
+      hc["add"](apo,1000,{parameter n.return n:obt:periapsis.}).
+      hc["add"](90,0.5,xferMap(b,{parameter o.return abs(mod(o:argumentOfPeriapsis,180)-90).})).
+      add find(hc,Node(time:seconds+180,0,0,0),List(0,10,10,0)).
       next().
     }).
     seq:add(exec@).
     seq:add({
       l("Capturing").idle().
       local hc is seek().
-      hc["add"](0,0.001,{parameter n.return n:obt:eccentricity.}).
+      hc["add"](0,0.0075,{parameter n.print round(n:obt:eccentricity,4). return n:obt:eccentricity.}).
       local v2 is velocityAt(ship,time:seconds+eta:periapsis):orbit:mag.
       local nd is find(hc,Node(time:seconds+eta:periapsis,0,0,-v2/10),List(0,0,0,v2/10)).
       local i is 0. if inc>90 set i to 180.
-      hc["add"](i,0.05,{parameter n.return n:obt:inclination.}).
+      hc["add"](i,1,{parameter n.print round(n:obt:inclination,4). return n:obt:inclination.}).
       add find(hc,nd,List(0,10,100,10)).
       next().
     }).
@@ -116,12 +112,17 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     seq:add({
       l("Performing inclination change").idle().
       local hc is seek().
-      hc["add"](lan,0.5,{parameter n.return n:obt:longitudeOfAscendingNode.}).
+      hc["add"](lan,1,{parameter n.return n:obt:longitudeOfAscendingNode.}).
       local nd is find(hc,Node(time:seconds+obt:period/2,0,obt:velocity:orbit:mag/2,0),List(obt:period/36,0,0,0)).
-      hc["add"](inc,0.05,{parameter n.return n:obt:inclination.}).
-      hc["add"](0,0.001,{parameter n.return n:obt:eccentricity.}).
+      hc["add"](inc,1,{parameter n.
+        //print round(n:obt:inclination,4).
+        return n:obt:inclination.}).
       set nd:normal to 0.
-      add find(hc,nd,List(0,0.1,10,10)).
+      set nd to find(hc,nd,List(0,0,10,0)).
+      hc["add"](0,0.005,{parameter n.
+        //print round(n:obt:eccentricity,4).
+        return n:obt:eccentricity.}).
+      add find(hc,nd,List(time:seconds+obt:period/36,0,10,10)).
       if nextNode:eta<30 set nextNode:eta to nextNode:eta+obt:period.
       next().
     }).
@@ -134,12 +135,12 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     if aop>=0{
       set nd:prograde to obt:velocity:orbit:mag/2.
       if b<>Kerbin set nd:prograde to-nd:prograde.
-      hc["add"](aop,0.05,{parameter n.return n:obt:argumentOfPeriapsis.}).
+      hc["add"](aop,0.5,{parameter n.return n:obt:argumentOfPeriapsis.}).
       set nd to find(hc,nd,List(obt:period/36,0,0,0)).
       set nd:prograde to 0.
     }
-    if b=Kerbin hc["add"](apo,500,{parameter n.return n:obt:apoapsis.}).
-    else hc["add"](peri,500,{parameter n.return n:obt:periapsis.}).
+    if b=Kerbin hc["add"](apo,1000,{parameter n.return n:obt:apoapsis.}).
+    else hc["add"](peri,1000,{parameter n.return n:obt:periapsis.}).
     add find(hc,nd,List(60,0,0,10)).
     if nextNode:eta<30 set nextNode:eta to nextNode:eta+obt:period.
     next().

@@ -29,9 +29,9 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
   }
   if b<>Kerbin{
     local exec is get("lib/exec-node-state.ks"):bind(next,1).
-    local find is get("lib/find-node.v2.ks").
+    local find is get("lib/find-node.v3.ks").
     local h is get("lib/hlog.ks").
-    local seek is get("lib/hill-climb.v2.ks").
+    local seek is get("lib/hill-climb.v3.ks").
     local x2 is get("lib/transfers-to.ks").
     seq:add({h("Circularizing parking orbit").
       local hc is seek().
@@ -43,7 +43,7 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     local findXfer is get("lib/finders.v2/closest-approach.ks").
     seq:add({h("Performing transfer").
       local hc is seek().
-      hc["add"](b:SOIRadius/3,b:SOIRadius/3,findXfer(b)).
+      hc["add"](0,b:SOIRadius,findXfer(b)).
       until hasNode and nextNode:eta>180 and x2(nextNode:obt,b){
         add find(hc,Node(time:seconds+(0.1+random())*obt:period,0,0,100),List(obt:period/5,10,10,100)).
         wait 0.
