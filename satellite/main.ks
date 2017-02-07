@@ -102,10 +102,9 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       local hc is seek().
       hc["add"](0,0.0075,{parameter n.print round(n:obt:eccentricity,4). return n:obt:eccentricity.}).
       local v2 is velocityAt(ship,time:seconds+eta:periapsis):orbit:mag.
-      local nd is find(hc,Node(time:seconds+eta:periapsis,0,0,-v2/10),List(0,0,0,v2/10)).
       local i is 0. if inc>90 set i to 180.
       hc["add"](i,1,{parameter n.print round(n:obt:inclination,4). return n:obt:inclination.}).
-      add find(hc,nd,List(0,10,100,10)).
+      add find(hc,Node(time:seconds+eta:periapsis,0,0,-v2/10),List(0,10,10,v2/10)).
       next().
     }).
     seq:add(exec@).
@@ -113,16 +112,14 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       l("Performing inclination change").idle().
       local hc is seek().
       hc["add"](lan,1,{parameter n.return n:obt:longitudeOfAscendingNode.}).
-      local nd is find(hc,Node(time:seconds+obt:period/2,0,obt:velocity:orbit:mag/2,0),List(obt:period/36,0,0,0)).
+      local nd is find(hc,Node(time:seconds+obt:period/2,0,obt:velocity:orbit:mag/10,0),List(obt:period/36,0,0,0)).
       hc["add"](inc,1,{parameter n.
         //print round(n:obt:inclination,4).
         return n:obt:inclination.}).
-      set nd:normal to 0.
-      set nd to find(hc,nd,List(0,0,10,0)).
-      hc["add"](0,0.005,{parameter n.
+      hc["add"](0,0.0075,{parameter n.
         //print round(n:obt:eccentricity,4).
         return n:obt:eccentricity.}).
-      add find(hc,nd,List(time:seconds+obt:period/36,0,10,10)).
+      add find(hc,nd,List(60,1,10,10)).
       if nextNode:eta<30 set nextNode:eta to nextNode:eta+obt:period.
       next().
     }).
@@ -133,15 +130,13 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     local hc is seek().
     local nd is Node(time:seconds+obt:period/2,0,0,0).
     if aop>=0{
-      set nd:prograde to obt:velocity:orbit:mag/2.
+      set nd:prograde to obt:velocity:orbit:mag/10.
       if b<>Kerbin set nd:prograde to-nd:prograde.
       hc["add"](aop,0.5,{parameter n.return n:obt:argumentOfPeriapsis.}).
-      set nd to find(hc,nd,List(obt:period/36,0,0,0)).
-      set nd:prograde to 0.
     }
     if b=Kerbin hc["add"](apo,1000,{parameter n.return n:obt:apoapsis.}).
     else hc["add"](peri,1000,{parameter n.return n:obt:periapsis.}).
-    add find(hc,nd,List(60,0,0,10)).
+    add find(hc,nd,List(obt:period/36,0,0,10)).
     if nextNode:eta<30 set nextNode:eta to nextNode:eta+obt:period.
     next().
   }).
