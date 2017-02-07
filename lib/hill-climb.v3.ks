@@ -13,7 +13,7 @@
       },
       "seek",{parameter point, steps, remap is {parameter x.return x.}, acceleration is 1.2.
         local candidates is List(-acceleration,-1/acceleration,0,1/acceleration,acceleration).
-        function satisfyGoal{parameter goalIndex.
+        function satisfyGoal{parameter goalIndex,steps.
           local goal is goals[goalIndex].
           local epsilon is epsilons[goalIndex].
           local eval is evals[goalIndex].
@@ -72,7 +72,7 @@
           local goal is findUnmetGoal().
           if goal[0]return point.
           print "resolving: "+goal[1].
-          satisfyGoal(goal[1]).
+          satisfyGoal(goal[1],steps).
         }
       }
     ).
