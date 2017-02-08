@@ -15,7 +15,7 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       set l to b:obt:longitudeOfAscendingNode.
     }
   }
-  if l>=0{
+  if l>=0 and i>0{
     local w2l is get("lib/warp-to-lan.ks").
     local e2l is get("lib/eta-to-lan.ks").
     seq:add({w2l(l).next().}).
