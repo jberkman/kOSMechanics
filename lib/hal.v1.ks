@@ -104,7 +104,7 @@
           local incoming is inbox[ik].
           inbox:remove(ik).
           set outbox[ik] to incoming.
-          print "Inbox: "+inbox:length+" Outbox: "+outbox:length+" nb: "+nb:length.
+          print "Inbox: "+inbox:length+" Outbox: "+outbox:length.
           for neighbor in nb{
             set neighbor to vadd(neighbor,incoming[0]).
             local nk is key(neighbor).
@@ -117,6 +117,7 @@
                 filterFront(score,inbox).
                 filterFront(score,outbox).
                 set inbox[nk] to List(neighbor,score).
+                print "    "+score:join(", ").
                 print "    Inbox: "+inbox:length+" Outbox: "+outbox:length.
               }
             }

@@ -32,11 +32,15 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
     local find is get("lib/find-node.v4.ks").
     local h is get("lib/hlog.ks").
     local hal9k is get("lib/hal.v1.ks").
+    local hohmann is get("lib/hohmann.v2.ks").
     local x2 is get("lib/transfers-to.ks").
     seq:add({h("Circularizing parking orbit").
       local hal is hal9k().
       hal["add"](0.1,{parameter n.return n:obt:semiMajorAxis-body:radius-apoapsis.}).
-      add find(hal,Node(time:seconds+eta:apoapsis,0,0,100),List(0,0,0,100)).
+      local t is time:seconds+eta:apoapsis.
+      print apoapsis.
+      print hohmann(t,apoapsis).
+      add find(hal,Node(t,0,0,hohmann(t,apoapsis)),List(0,0,0,100)).
       next().
     }).
     seq:add(exec@).
@@ -45,7 +49,8 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       local hal is hal9k().
       hal["add"](b:SOIRadius/4,findXfer(b)).
       until hasNode and nextNode:eta>180 and x2(nextNode:obt,b){
-        add find(hal,Node(time:seconds+(0.25+random())*obt:period,0,0,100),List(60,25,25,100)).
+        local t is time:seconds+obt:period.
+        add find(hal,Node(t,0,0,hohmann(t,b:altitude)),List(60,25,25,100)).
         wait 0.
       }
       next().
