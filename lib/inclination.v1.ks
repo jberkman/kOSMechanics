@@ -1,0 +1,1 @@
+put({parameter t.local v is obt:velocity:orbit:mag. return List(v*sin(t),v*(cos(t)-1)).}).

@@ -50,7 +50,7 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       hal["add"](b:SOIRadius/4,findXfer(b)).
       until hasNode and nextNode:eta>180 and x2(nextNode:obt,b){
         local t is time:seconds+obt:period.
-        add find(hal,Node(t,0,0,hohmann(t,b:altitude)),List(60,25,25,100)).
+        add find(hal,Node(t,0,0,hohmann(t,b:altitude)),List(obt:period/36,10,10,10)).
         wait 0.
       }
       next().

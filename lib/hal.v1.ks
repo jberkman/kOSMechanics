@@ -2,16 +2,16 @@
   local map is get("lib/map.ks").
   put({
     local ef is List().//[[e,f],...]
-    function cmp{parameter l,r.
-      local x is 0.
+    function dominates{parameter l,r.
+      local d is 0.
       local i is 0.until i=l:length{
-        if l[i]>ef[i][0]or r[i]>ef[i][0]{
-          if l[i]<r[i] set x to x-1.
-          else if l[i]>r[i] set x to x+1.
-        }
+        //print "    ["+i+"]    "+l[i]+"    "+r[i].
+        if l[i]>r[i]return 0.
+        if l[i]<r[i]set d to 1.
         set i to i+1.
       }
-      return x.
+      //print "    ===>    "+d.
+      return d.
     }
     function contains{parameter l,f.for i in l if f(i)return 1.return 0.}
     function eval{parameter x.
@@ -24,8 +24,8 @@
     }
     function filterFront{parameter x,lex.
       for k in lex:keys{
-        if cmp(x,lex[k][1])<0{
-          //print "Removing: "+k.
+        if dominates(x,lex[k][1]){
+          print "Removing: "+lex[k][1]:join("    ").
           lex:remove(k).
         }
       }
@@ -73,15 +73,18 @@
       return p.
     }
     function hc{parameter x,score,steps,g.
+      local e is ef[0][0].
+      local f is ef[0][1].
+      set score to score[0].
       local nb is neighbors(steps).
       until 0{
         local next is-1.
         local found is 0.
         for neighbor in nb{
           set neighbor to vadd(neighbor,x).
-          local tmp is eval(g(neighbor)).
-          if solves(tmp) return neighbor.
-          if cmp(tmp,score)<0{
+          local tmp is abs(f(g(neighbor))).
+          if tmp<=e return neighbor.
+          if tmp<score{
             set score to tmp.
             set next to neighbor.
             set found to 1.
@@ -90,6 +93,7 @@
         if found set x to next.
         else{
           set steps to smult(steps,0.5).
+          print steps.
           set nb to neighbors(steps).
         }
       }
@@ -112,8 +116,8 @@
               local score is eval(g(neighbor)).
               //print "    neighbor: "+nk+" "+score:join(", ").
               if solves(score)return neighbor.
-              function cb{parameter x.return cmp(score,x[1])>0.}
-              if cmp(score,incoming[1])<=0 and not contains(outbox:values,cb@) and not contains(inbox:values,cb@){
+              function cb{parameter x.return dominates(x[1],score).}
+              if not dominates(incoming[1],score) and not contains(outbox:values,cb@) and not contains(inbox:values,cb@){
                 filterFront(score,inbox).
                 filterFront(score,outbox).
                 set inbox[nk] to List(neighbor,score).
