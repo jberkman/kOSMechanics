@@ -76,14 +76,7 @@ put(get("lib/fsm.ks")({parameter seq,ev,next.
       local goalInc is 0.
       if inc>90 set goalInc to 180.
       hal["add"](30,xferMap(b,{parameter o.return o:inclination-goalInc.})).
-      //set nd to find(hal,nd,List(0,5,5,0)).
-      //set hal to hal9k().
       hal["add"](1000,xferMap(b,{parameter o.return o:periapsis-apo.})).
-      //set nd to find(hal,nd,List(0,5,5,0)).
-      //hal["add"](1,xferMap(b,{parameter o.
-      //  local a is abs(o:inclination-goalInc). if a<1 return a.
-      //  return abs(mod(o:argumentOfPeriapsis,180)-90)-90.
-      //})).
       add find(hal,nd,List(0,5,5,0)).
       next().
     }).
