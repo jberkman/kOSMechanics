@@ -1,0 +1,1 @@
+g00_01({until not hasNode{remove nextNode. wait 0.}}).

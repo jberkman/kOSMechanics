@@ -1,0 +1,1 @@
+g00_01({g00_03("PGM 02 01").local a is alt:radar+60. until alt:radar>a. sas off.}).

@@ -1,0 +1,1 @@
+{local ov is g00_02("p/fd 0d.ks").g00_01({parameter t,h1,o is ship. local h0 is (positionAt(o,t)-o:obt:body:position):mag-o:obt:body:radius. return ov(o:obt,h0,0.5*(h0+h1)+o:obt:body:radius)-ov(o:obt,h0).}).}

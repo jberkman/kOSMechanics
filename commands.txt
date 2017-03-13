@@ -1,0 +1,93 @@
+// Misc
+00 00 boot
+00 01 init
+00 02 idle
+
+00 f1 main
+00 f2 mission
+00 f3 fsm state
+
+// Misc globals
+g00_01 put                  function
+g00_02 get                  remote path, [local path]
+g00_03 hlog
+
+// Pre-launch
+01 01 system self-check
+01 02 warp-to-lan           lan
+01 03 verify eta-to-lan     lan, cb if true
+01 04 terminal count
+01 05 ignition              altitude
+
+// Launch
+02 01 unguided ascent
+02 02 gravity turn          inclination, pitch rate
+02 03 track prograde        periapsis
+02 04 horizontal flight     periapsis, inclination
+02 05 coast
+02 06 periapsis boost       periapsis
+02 07 stage
+
+// Launch globals
+g02_01 pitch timer          seconds
+g02_02 launch azimuth
+g02_03 horizontal heading   
+
+// Orbital Manouevres
+03 01 execute manoeuvre     next, [warp]
+03 02 height adjustment     time, height
+03 03 height adjustment 2   argument of periapsis, height
+03 04 circularize at apo
+03 05 circularize at peri
+03 06 inclination change    inclination, longitude of ascending node
+
+// Transfer Manoeuvres
+04 01 transfer to body      body
+04 02 transfer correction   body
+04 03 mid-course correction body, inclination
+04 04 coast to SOI
+04 05 capture inclination adjustment
+04 06 capture burn
+
+// Landing Manoeuvres
+05 01 deorbit
+
+// Library subroutines
+fd 01 fnapply               function, List(arguments).
+fd 02 countdown             message, count
+fd 03 ETA to LAN            longitude of ascending node
+fd 04 clamp                 x, minimum value, maximum value
+fd 05 compass for vec       orbitable, velocity
+fd 06 launch heading        inclination
+fd 07 finite state machine  function(seq,ev,next)
+fd 08 mission
+fd 09 fsm program           seq, next, program, [args]
+fd 0a burn time             dV
+fd 0b kill warp             
+fd 0c execute manoeuvre     [warp]
+fd 0d orbital velocity      orbit, height, [semi-major axis]
+fd 0e hohmann dV            time, height, [orbitable]
+fd 0f hill climb/multi-constraint optimization
+fd 10 clear nodes
+fd 11 list to node          list
+fd 12 node to list          node
+fd 13 find node             solve(X, steps, map()), start node, steps
+fd 14 golden section search
+                            a, b, e, f
+fd 15 transfers to          orbit, body
+fd 16 transfer orbit        orbit, body
+fd 17 closest approach      body, [epsilon]
+fd 18 map                   list, f
+
+// Boot Scripts
+fe 00 console
+fe 01 lifter
+fe 02 satellite
+fe fe staging test
+fe ff science test
+
+// Remote commands
+ff 01 patch                 vessel name, patch src, [patch dest]
+ff 02 record science        vessel name, [transmit]
+ff 03 reset fsm             vessel name
+ff 04 send cmd              vessel name, command, [List(args)]

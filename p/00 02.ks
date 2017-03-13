@@ -1,0 +1,1 @@
+g00_01({g00_03("PGM 00 02").wait until not ship:messages:empty.}).

@@ -1,0 +1,1 @@
+{local f is "1:/00 f3.ks".g00_01({parameter d.local r is 0.if exists(f)set r to g00_02("00 f3.ks").local s is list().local e is Lex().local n is{parameter m is r+1.if m<0 set r to r+m. else set r to m. if not exists(f)create(f).local h is open(f).h:clear().h:write("g00_01("+r+").").}.d(s,e,n).return{until r>=s:length{s[r]().local v2 is 0. for v2 in e:values v2().wait 0.}}.}).}

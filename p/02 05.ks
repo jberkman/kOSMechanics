@@ -1,0 +1,1 @@
+g00_01({g00_03("PGM 02 05").lock throttle to 0. local l is 0. list engines in l. local m is{local e is 0. for e in l if e:thrust>0 return 0. return 1.}.until m().lock steering to lookDirUp(ship:velocity:orbit,-up:vector).wait until altitude>body:atm:height.}).

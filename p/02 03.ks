@@ -1,0 +1,1 @@
+g00_01({parameter a.g00_03("PGM 02 03").lock steering to lookDirUp(ship:velocity:surface,-up:vector). wait until ship:q<0.02 or apoapsis>=a.}).

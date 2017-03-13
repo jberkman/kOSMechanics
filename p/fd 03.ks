@@ -1,0 +1,1 @@
+g00_01({parameter l. return mod(720+l-longitude-body:rotationAngle,360)*body:rotationPeriod/360.}).

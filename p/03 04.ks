@@ -1,0 +1,1 @@
+{local f is g00_02("p/fd 0e.ks").g00_01({g00_03("PGM 03 04").local t is time:seconds+eta:apoapsis. add Node(t,0,0,f(t,apoapsis)).}).}

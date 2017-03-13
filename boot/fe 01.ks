@@ -1,0 +1,1 @@
+@lazyglobal off.{local l is "1:/p/00 00.ks".if not exists(l)copyPath("0:/p/00 00.ks",l).runPath(l).g00_02("p/00 01")("p/fe 01.ks")().}

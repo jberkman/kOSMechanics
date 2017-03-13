@@ -1,0 +1,1 @@
+{local e is g00_02("p/fd 03.ks").g00_01({parameter l,n.g00_03("PGM 01 03").if kUniverse:timeWarp:isSettled and e(l)<30 n().}).}

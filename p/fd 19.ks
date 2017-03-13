@@ -1,0 +1,1 @@
+g00_01({parameter m,k,d.if m:hasKey(k)return m[k].return d.}).

@@ -1,0 +1,1 @@
+g00_01({parameter o,h,a is o:semiMajorAxis. return sqrt(o:body:mu*(2/(h+o:body:radius)-1/a)).}).

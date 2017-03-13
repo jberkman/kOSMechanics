@@ -1,0 +1,1 @@
+{local c is g00_02("p/fd 02.ks").local e is g00_02("p/fd 03.ks").g00_01({parameter l.g00_03("PGM 01 02").c("Warping to LAN in ",15).warpTo(time:seconds-30+e(l)).}).}

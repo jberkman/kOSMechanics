@@ -1,0 +1,1 @@
+{local c is g00_02("p/fd 04.ks").g00_01({parameter i,r.g00_03("PGM 02 02").global g02_01 is time:seconds. global g02_02 is arcsin(c(cos(i)/cos(latitude),-1,1)).lock steering to lookDirUp(heading(g02_02,90-r*(time:seconds-g02_01)):vector,heading(g02_02,-45):vector).local q is ship:q. until q>ship:q or ship:q>0.2 set q to ship:q.}).}
