@@ -1,0 +1,1 @@
+{local x is g00_02("p/fd 15.ks").local o is g00_02("p/fd 16.ks").g00_01({parameter b,f.return{parameter n.if x(n:obt,b)return f(o(n:obt,b)).return 2^64.}.}).}

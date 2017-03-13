@@ -1,0 +1,1 @@
+g00_01({g00_03("PGM 01 06").wait until ship:modulesNamed("kOSProcessor"):length=1 and altitude>body:atm:height. wait 10.}).

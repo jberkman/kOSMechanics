@@ -1,7 +1,6 @@
 g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
-  local m is g00_02("p/fd 08.ks").
   local pgm is g00_02("p/fd 09.ks"):bind(seq,next@).
-  local g is g00_02("p/fd 19.ks"):bind(m).
+  local g is g00_02("p/fd 19.ks"):bind(g00_02("p/fd 08.ks")).
   local b is g("body",Kerbin).
   local p is g("launch.pitch-rate",0.4).
   local a is 0. local i is 0. local l is 0.
