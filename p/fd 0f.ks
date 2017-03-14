@@ -22,12 +22,13 @@
       }
       return values.
     }
-    function filterFront{parameter x,lex.
-      for k in lex:keys{
-        if dominates(x,lex[k][1]){
-          print "Removing: "+lex[k][1]:join("    ").
-          lex:remove(k).
+    function filterFront{parameter x,l.
+      local i is l:length-1.until i<0{
+        if dominates(x,l[i][1]){
+          print "Removing: "+l[i][1]:join("    ").
+          l:remove(i).
         }
+        set i to i-1.
       }
     }
     function key{parameter l.return l:join(",").}
@@ -99,37 +100,37 @@
       }
     }
     function moo{parameter x,score,steps,g.
-      local inbox is Lex(key(x),List(x,score)).
-      local outbox is Lex().
+      local inbox is List(List(x,score)).
+      local outbox is List().
       until 0{
         local nb is neighbors(steps).
         until inbox:length=0{
-          local ik is inbox:keys[0].
-          local incoming is inbox[ik].
-          inbox:remove(ik).
-          set outbox[ik] to incoming.
+          local incoming is inbox[0].
+          outbox:add(incoming).
+          inbox:remove(0).
           print "Inbox: "+inbox:length+" Outbox: "+outbox:length.
+          print incoming[0]:join(", ").
           for neighbor in nb{
             set neighbor to vadd(neighbor,incoming[0]).
+            local score is eval(g(neighbor)).
+            //print "    neighbor: "+neighbor:join(", ").//+" "+score:join(", ").
+            //wait 1.
+            if solves(score)return neighbor.
             local nk is key(neighbor).
-            if not inbox:hasKey(nk) and not outbox:hasKey(nk){
-              local score is eval(g(neighbor)).
-              //print "    neighbor: "+nk+" "+score:join(", ").
-              if solves(score)return neighbor.
-              function cb{parameter x.return dominates(x[1],score).}
-              if not dominates(incoming[1],score) and not contains(outbox:values,cb@) and not contains(inbox:values,cb@){
-                filterFront(score,inbox).
-                filterFront(score,outbox).
-                set inbox[nk] to List(neighbor,score).
-                print "    "+score:join(", ").
-                print "    Inbox: "+inbox:length+" Outbox: "+outbox:length.
-              }
+            function cb{parameter x.return nk=key(x[0])or dominates(x[1],score).}
+            if not dominates(incoming[1],score) and not contains(outbox,cb@) and not contains(inbox,cb@){
+              filterFront(score,inbox).
+              filterFront(score,outbox).
+              inbox:add(List(neighbor,score)).
+              print "    "+score:join(", ").
+              print "    Inbox: "+inbox:length+" Outbox: "+outbox:length.
             }
           }
         }
         set inbox to outbox.
-        set outbox to Lex().
+        set outbox to List().
         set steps to smult(steps,0.5).
+        print "STEPS "+steps:join(", ").
       }
     }
     return Lex(

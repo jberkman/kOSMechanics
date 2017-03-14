@@ -21,10 +21,10 @@
     }
     //if nd:eta<0{s().return.}
     local h is hal().
-    if i<90 set i to 0.
-    else set i to 180.
+    if i<90 set i to 0.else set i to 180.
     h["add"](30,xferMap(b,{parameter o.return o:inclination-i.})).
+    set nd to find(h["solve"]@,nd,List(0,1,1,1)).
     h["add"](1000,xferMap(b,{parameter o.return o:periapsis-a.})).
-    add find(h["solve"]@,nd,List(0,5,5,0)).
+    add find(h["solve"]@,nd,List(0,1,1,1)).
   }).
 }
