@@ -94,7 +94,6 @@
         if found set x to next.
         else{
           set steps to smult(steps,0.5).
-          print steps.
           set nb to neighbors(steps).
         }
       }

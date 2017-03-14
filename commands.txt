@@ -43,12 +43,13 @@ g02_03 horizontal heading
 03 05 circularize at peri
 03 06 inclination change    inclination, longitude of ascending node
 03 07 ensure stable orbit
+03 08 adj arg of peri       height, aop
 
 // Transfer Manoeuvres
 04 01 transfer to body      body
 04 02 transfer correction   body
 04 03 mid-course correction body, apoapsis, inclination, err()
-04 04 coast to SOI
+04 04 coast to SOI          body, [warp]
 04 05 capture inclination adjustment
 04 06 capture burn
 
@@ -64,7 +65,7 @@ fd 05 compass for vec       orbitable, velocity
 fd 06 launch heading        inclination
 fd 07 finite state machine  function(seq,ev,next)
 fd 08 mission
-fd 09 fsm program           seq, next, program, [args]
+fd 09 fsm program           seq, next, program, [args], [idle]
 fd 0a burn time             dV
 fd 0b kill warp             
 fd 0c execute manoeuvre     [warp]
@@ -85,6 +86,7 @@ fd 19 get value             dict, key, default
 fd 1a altitude at           time
 fd 1b transfer eta          orbit, body
 fd 1c transfer map          
+fd 1d inclination dv        angle
 
 // Boot Scripts
 fe 00 console

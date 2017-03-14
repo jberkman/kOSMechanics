@@ -1,0 +1,1 @@
+g00_01({wait until vAng(steering:vector,facing:vector)<2.}).
