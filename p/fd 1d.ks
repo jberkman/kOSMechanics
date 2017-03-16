@@ -1,1 +1,1 @@
-g00_01({parameter t.local v is obt:velocity:orbit:mag. return List(v*sin(t),v*(cos(t)-1)).}).
+g00_01({parameter t,v1 is obt:velocity:orbit:mag,v2 is v1. return List(v2*sin(t),v2*cos(t)-v1).}).

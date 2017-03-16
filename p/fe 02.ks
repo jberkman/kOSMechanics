@@ -24,18 +24,16 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
     pgm("p/04 02.ks",List(b),idle@).
     pgm("p/03 01.ks",List({parameter x.},w)).
     local clamp is g00_02("p/fd 04.ks").
-    local i is clamp(g("inc",0),0.5,179.5).
+    local i is g("inc",0).
     pgm("p/04 03.ks",List(b,apo,i,next:bind(-3)),idle@).
     pgm("p/03 01.ks",List(next@,w)).
     pgm("p/04 04.ks",List(b,w),idle@).
-    pgm("p/04 05.ks",List(),idle@).
+    pgm("p/04 05.ks",List(apo),idle@).
     pgm("p/03 01.ks",List(next@,w)).
     pgm("p/04 06.ks",List(),idle@).
     pgm("p/03 01.ks",List(next@,w)).
-    pgm("p/03 05.ks",List(),idle@).
-    pgm("p/03 01.ks",List(next@,w)).
     local l is g("lan",-1).
-    pgm("p/03 06.ks",List(i,l),idle@).
+    pgm("p/03 06.ks",List(clamp(i,0.5,179.5),l),idle@).
     pgm("p/03 01.ks",List(next@,w)).
     pgm("p/03 08.ks",List(peri,aop),idle@).
     pgm("p/03 01.ks",List(next@,w)).

@@ -7,7 +7,7 @@
     local nd is Node(t,0,0,hohmann(t,alt)).
     if aop>=0{
       local h is hal().
-      h["add"](0.5,{parameter n.return n:obt:argumentOfPeriapsis-aop.}).
+      h["add"](0.1,{parameter n.return n:obt:argumentOfPeriapsis-aop.}).
       add find(h["solve"]@,nd,List(obt:period/36,0,0,0)).
     }else add nd.
     if nextNode:eta<30 set nextNode:eta to nextNode:eta+obt:period.
