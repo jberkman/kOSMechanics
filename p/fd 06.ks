@@ -1,1 +1,1 @@
-{local c is g00_02("p/fd 04.ks").local h is g00_02("p/fd 05.ks").g00_01({parameter i.return-10*arcsin(c(cos(i)/cos(latitude),-1,1))-9*h(ship,ship:velocity:orbit).}).}
+{local c is g00_02("p/fd 04.ks").local h is g00_02("p/fd 05.ks").local z is g00_02("p/fd 1f.ks").g00_01({parameter i.local a is z(i).return a+c(5*(a-h(ship,ship:velocity:orbit)),-22.5,22.5).}).}

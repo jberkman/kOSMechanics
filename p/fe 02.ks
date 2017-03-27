@@ -1,14 +1,16 @@
 g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
   local pgm is g00_02("p/fd 09.ks"):bind(seq,next@).
-  pgm("p/01 06.ks").
   local w is 1.
-  pgm("p/03 01.ks",List({parameter x.},w)).
   local g is g00_02("p/fd 19.ks"):bind(g00_02("p/fd 08.ks")).
   local b is g("body",Kerbin).
-  local apo is g("apo",b:atm:height+10000).
-  local peri is g("peri",b:atm:height+10000).
+  local ecc is g("ecc",0).
+  local sma is g("sma",b:radius+b:atm:height+10000).
+  local apo is sma*(1+ecc)-b:radius.
+  local peri is sma*(1-ecc)-b:radius.
   local aop is g("aop",-1).
   local idle is g("idle",{}).
+  pgm("p/01 06.ks").
+  pgm("p/03 01.ks",List({parameter x.},w)).
   if b=Kerbin{
     pgm("p/03 07.ks").
     pgm("p/03 01.ks",List({parameter x.},w)).
@@ -28,7 +30,7 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
     pgm("p/04 03.ks",List(b,apo,i,next:bind(-3)),idle@).
     pgm("p/03 01.ks",List(next@,w)).
     pgm("p/04 04.ks",List(b,w),idle@).
-    pgm("p/04 05.ks",List(apo),idle@).
+    pgm("p/04 05.ks",List(),idle@).
     pgm("p/03 01.ks",List(next@,w)).
     pgm("p/04 06.ks",List(),idle@).
     pgm("p/03 01.ks",List(next@,w)).

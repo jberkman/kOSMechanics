@@ -1,0 +1,1 @@
+{local c is g00_02("p/fd 04.ks").g00_01({parameter i.return 180-arcsin(c(cos(i)/cos(latitude),-1,1)).}).}

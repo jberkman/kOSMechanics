@@ -89,11 +89,13 @@ fd 1b transfer eta          orbit, body
 fd 1c transfer map          
 fd 1d inclination dv        angle, [velocity1], [velocity2]
 fd 1e steer to direction
+fd 1f azimuth               inclination, [ship]
 
 // Boot Scripts
 fe 00 console
 fe 01 lifter
 fe 02 satellite
+fe 03 orbital mission
 fe fe staging test
 fe ff science test
 
