@@ -1,0 +1,1 @@
+g00_01({parameter s is ship,c is ship:facing:vector. return 90-vang(s:up:vector,c).}).

@@ -6,7 +6,9 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
   local a is 0. local i is 0. local l is 0.
   local w is 1.
   if b=Kerbin{
-    set a to g("peri",g("apo",b:atm:height+10000)).
+    local ecc is g("ecc",0).
+    local sma is g("sma",b:radius+b:atm:height+10000).
+    set a to sma*(1-ecc)-b:radius.
     set i to g("inc",0).
     set l to g("lan",-1).
   }else{
@@ -26,6 +28,7 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
   pgm("p/02 01.ks").
   pgm("p/02 02.ks",List(i,p)).
   pgm("p/02 03.ks",List(a)).
+  pgm("p/02 08.ks",List(a,i)).
   pgm("p/02 04.ks",List(a,i)).
   pgm("p/02 05.ks").
   if g("launch.raise-peri",0){

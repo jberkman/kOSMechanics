@@ -1,0 +1,1 @@
+g00_01({g00_03("PGM 06 02").for m in ship:modulesNamed("SCANSat"){if m:hasEvent("analyze data")m:doEvent("analyze data").if m:hasEvent("start radar scan")m:doEvent("start radar scan").}}).
