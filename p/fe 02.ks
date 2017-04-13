@@ -42,6 +42,5 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
     pgm("p/03 03.ks",List(apo),idle@).
     pgm("p/03 01.ks",List(next@,w)).
   }
-  seq:add(pgm("p/06 02.ks",List(),idle@)).
-  seq:add(pgm("p/00 02.ks",List(),idle@)).
+  pgm("p/00 02.ks",List(),idle@).
 })).
