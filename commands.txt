@@ -46,6 +46,8 @@ g02_03 horizontal heading
 03 07 ensure stable orbit
 03 08 adj arg of peri       height, aop
 03 09 equitorial orbit
+03 0a transfer to peer      peer, phase angle
+03 0b fine-adjust SMA       SMA
 
 // Transfer Manoeuvres
 04 01 transfer to body      body
@@ -54,12 +56,15 @@ g02_03 horizontal heading
 04 04 coast to SOI          body, [warp]
 04 05 capture inclination adjustment
 04 06 capture burn
+04 07 impact mid-course correction
+                            body, err()
 
 // Landing Manoeuvres
 05 01 deorbit
+05 02 Untargeted hoverslam
 
 // Science stuff
-06 01 record science        [xmit]
+06 01 record science        [xmit], [only rerunnable]
 06 02 run scanners
 
 // Library subroutines
@@ -102,6 +107,7 @@ fe 00 console
 fe 01 lifter
 fe 02 satellite
 fe 03 orbital mission
+fe 04 untargeted direct-descent
 fe fe staging test
 fe ff science test
 

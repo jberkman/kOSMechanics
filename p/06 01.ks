@@ -1,1 +1,1 @@
-g00_01({parameter t is 0.g00_03("PGM 06 01").local l is Lex().for m in ship:modulesNamed("ModuleScienceExperiment"){if not m:inoperable and not m:hasData and not l:hasKey(m:part:name){m:deploy().if t{wait until m:hasData. wait 1.m:transmit().}.set l[m:part:name] to 1.}}}).
+g00_01({parameter t is 0,r is 0.g00_03("PGM 06 01").local l is Lex().for m in ship:modulesNamed("ModuleScienceExperiment"){if not m:inoperable and not m:hasData and not l:hasKey(m:part:name)and(not r or m:rerunnable){m:deploy().if t{wait 1.m:transmit().}.set l[m:part:name] to 1.}}}).

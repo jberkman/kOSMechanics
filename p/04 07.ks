@@ -6,8 +6,8 @@
   local altAt is g00_02("p/fd 1a.ks").
   local xferETA is g00_02("p/fd 1b.ks").
   local xferMap is g00_02("p/fd 1c.ks").
-  g00_01({parameter b,a,i,e.
-    g00_03("PGM 04 03").
+  g00_01({parameter b,e.
+    g00_03("PGM 04 07").
     if not x2(obt,b){e().return.}
     //if altitude>b:altitude/2{s().return.}
     set target to b.
@@ -21,10 +21,8 @@
     }
     //if nd:eta<0{s().return.}
     local h is hal().
-    if i<90 set i to 0.else set i to 180.
-    h["add"](30,xferMap(b,{parameter o.return o:inclination-i.})).
     set nd to find(h["solve"]@,nd,List(0,1,1,1)).
-    h["add"](max(1000,0.01*abs(a)),xferMap(b,{parameter o.return o:periapsis-a.})).
+    h["add"](b:radius/2,xferMap(b,{parameter o.return o:periapsis+b:radius.})).
     add find(h["solve"]@,nd,List(0,0.5,0.5,0.5)).
   }).
 }

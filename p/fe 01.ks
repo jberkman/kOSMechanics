@@ -1,11 +1,16 @@
 g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
   local pgm is g00_02("p/fd 09.ks"):bind(seq,next@).
-  local g is g00_02("p/fd 19.ks"):bind(g00_02("p/fd 08.ks")).
-  local b is g("body",Kerbin).
+  local m is g00_02("p/fd 08.ks").
+  local g is g00_02("p/fd 19.ks"):bind(m).
+  local b is Kerbin.
+  local hasPeer is m:hasKey("peer").
+  local peer is g("peer",0).
+  if hasPeer set b to peer:obt:body.
+  set b to g("body",b).
   local p is g("launch.pitch-rate",0.4).
   local a is 0. local i is 0. local l is 0.
   local w is 1.
-  if b=Kerbin{
+  if b=Kerbin and hasPeer=0{
     local ecc is g("ecc",0).
     local sma is g("sma",b:radius+b:atm:height+10000).
     set a to sma*(1-ecc)-b:radius.
@@ -16,6 +21,9 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
     if b:obt:body=Kerbin{
       set i to b:obt:inclination.
       set l to b:obt:longitudeOfAscendingNode.
+    }else if hasPeer{
+      set i to peer:obt:inclination.
+      set l to peer:obt:longitudeOfAscendingNode.
     }
   }
   if l>=0 and i>0{
@@ -35,13 +43,19 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
     pgm("p/02 06.ks",List(a)).
     pgm("p/03 01.ks",List(next@,w)).
   }
-  if b<>Kerbin{
-    pgm("p/03 04.ks").
+  if b<>Kerbin or hasPeer{
+    local s2d is g00_02("p/fd 1e.ks").
+    local idle is{lock steering to lookDirUp(prograde:vector,-up:vector).s2d().}.
+    pgm("p/03 04.ks",List(),idle@).
     pgm("p/03 01.ks",List(next@,w)).
-    pgm("p/04 01.ks",List(b)).
+    if b<>Kerbin{
+      pgm("p/04 01.ks",List(b),idle@).
+    }else{
+      pgm("p/03 0a.ks",List(peer,g("phase",60)),idle@).
+    }
     pgm("p/03 01.ks",List(next@,w)).
   }
   if g("launch.stage",1)pgm("p/02 07.ks").
   if g("launch.deorbit",0)pgm("p/05 01.ks").
-  seq:add(pgm("p/00 02.ks")).
+  pgm("p/00 02.ks").
 })).

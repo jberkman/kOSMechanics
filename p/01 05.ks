@@ -1,1 +1,1 @@
-g00_01({parameter a.g00_03("PGM 01 05").sas on. lock throttle to 1-0.999*apoapsis/(a+body:radius).local t is time:seconds+3. wait until verticalSpeed>1 or time:seconds>t. if verticalSpeed<1 stage.}).
+g00_01({parameter a.g00_03("PGM 01 05").sas on. lock throttle to 1. local t is time:seconds+3. wait until verticalSpeed>1 or time:seconds>t. if verticalSpeed<1 stage.}).
