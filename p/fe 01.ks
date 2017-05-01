@@ -49,7 +49,7 @@ g00_01(g00_02("p/fd 07.ks")({parameter seq,ev,next.
     pgm("p/03 04.ks",List(),idle@).
     pgm("p/03 01.ks",List(next@,w)).
     if b<>Kerbin{
-      pgm("p/04 01.ks",List(b),idle@).
+      pgm("p/03 0a.ks",List(b,0),idle@).
     }else{
       pgm("p/03 0a.ks",List(peer,g("phase",60)),idle@).
     }
