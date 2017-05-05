@@ -3,7 +3,7 @@
   local _0302 is g00_02("p/03 02.ks").
   local _0303 is g00_02("p/03 03.ks").
   local _0304 is g00_02("p/03 04.ks").
-  local _0307 is g00_02("p/03 07.ks").
+  local _0305 is g00_02("p/03 05.ks").
   local _0308 is g00_02("p/03 08.ks").
   local _fd07 is g00_02("p/fd 07.ks").
   local _fd19 is g00_02("p/fd 19.ks").
@@ -26,15 +26,25 @@
       local peri is sma*(1-ecc)-b:radius.
       local aop is o("aop",-1).
       local idle is g("idl",{}).
-      pgm(_0307@).
-      pgm(_0301@,List({parameter x.},w)).
-      pgm(_0303@,List(peri)).
+      pgm({
+        if obt:semiMajorAxis>sma _0302(apo).
+        else _0303(peri).
+      },List(),idle@).
       pgm(_0301@,List(next@,w)).
-      pgm(_0304@).
+      pgm({
+        if obt:semiMajorAxis>sma _0305().
+        else _0304().
+      },List(),idle@).
       pgm(_0301@,List(next@,w)).
-      pgm(_0308@,List(apo,aop)).
+      pgm({
+        local a is apo.
+        if obt:semiMajorAxis>sma set a to peri.
+        _0308(a,aop).
+      },List(),idle@).
       pgm(_0301@,List(next@,w)).
-      pgm(_0302@,List(peri)).
+      pgm(_0302@,List(peri),idle@).
+      pgm(_0301@,List(next@,w)).
+      pgm(_0303@,List(apo),idle@).
       pgm(_0301@,List(next@,w)).
     })().
   }).

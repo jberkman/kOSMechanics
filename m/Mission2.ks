@@ -44,6 +44,10 @@
         "cmd","nop",
         "idl",_0106@
       ),
+      Lex(
+        "cmd","om0",
+        "idl",idl@
+      ),
 //      Lex(
 //        "cmd","tm2",
 //        "obt",tgtObt,
