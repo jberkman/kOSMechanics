@@ -1,0 +1,1 @@
+g00_01({parameter f,v.if exists(f)return readJSON(f)[0].return v.}).

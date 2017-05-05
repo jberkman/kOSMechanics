@@ -1,0 +1,1 @@
+g00_01({deletePath("1:/00 f3.kson").}).

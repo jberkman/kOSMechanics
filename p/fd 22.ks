@@ -1,0 +1,1 @@
+g00_01({parameter f,v.writeJSON(v,f).}).
