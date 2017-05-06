@@ -74,11 +74,11 @@ g02_03 horizontal heading
 07 02 (stg) stage
 07 03 (atv) wait until active
 
-
-07 20 (om0) stabilize orbit
-07 21 (om1) co-planar orbit change
+07 21 (om1) circ @ apo      params (idl)
+07 22 (om2) stabilize orbit params (idl)
+07 23 (om3) co-planar orbit change
                             params (idl, obt: {bdy, ecc, sma, aop})
-07 22 (om2) non-planar orbit change
+07 24 (om4) non-planar orbit change
                             params (idl, obt: {bdy, inc, ecc, sma, lan, aop})
 
 07 41 (tm1) initial transfer burn

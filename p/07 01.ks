@@ -66,16 +66,6 @@
       //  seq:add(next@).
       //  seq:add(next@).
       //}
-      if b=Kerbin and not hasPeer return.
-      local idl is{lock steering to lookDirUp(prograde:vector,-up:vector)._fd1e().}.
-      pgm(_0304@,List(),idl@).
-      pgm(_0301@,List(next@,w)).
-      if b<>Kerbin{
-        pgm(_030a@,List(b,0),idl@).
-      }else{
-        pgm(_030a@,List(peer,g("phs",60)),idl@).
-      }
-      pgm(_0301@,List(next@,w)).
     })().
   }).
 }
