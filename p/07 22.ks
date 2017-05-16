@@ -9,7 +9,7 @@
       g00_03("PGM 07 22").
       local pgm is _fd27:bind(seq,next@).
       pgm(_0307@,List(),_fd19(m,"idl",{})).
-      pgm(_0301@,List({parameter x.},1)).
+      pgm(_0301@,List({parameter x.},_fd19(m,"wrp",1))).
     })().
   }).
 }

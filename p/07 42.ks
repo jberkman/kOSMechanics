@@ -12,8 +12,8 @@
     _fd07({parameter seq,ev,next.
       g00_03("PGM 07 42").
       local pgm is _fd27:bind(seq,next@).
-      local w is 1.
       local g is _fd19:bind(m).
+      local w is g("wrp",1).
       local o is _fd19:bind(g("obt",Lex())).
       local b is o("bdy",Kerbin).
       local ecc is o("ecc",0).

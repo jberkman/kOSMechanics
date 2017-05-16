@@ -12,7 +12,7 @@
       local g is _fd19:bind(m).
       local o is _fd19:bind(g("obt",Lex())).
       pgm(_0306@,List(_fd04(o("inc",0),0.5,179.5),o("lan",-1)),g("idl",{})).
-      pgm(_0301@,List(next@,1)).
+      pgm(_0301@,List(next@,g("wrp",1))).
     })().
   }).
 }

@@ -30,7 +30,7 @@
       set b to o("bdy",b).
       local p is g("prt",0.4).
       local a is 0. local i is 0. local l is 0.
-      local w is 1.
+      local w is g("wrp",1).
       local ecc is o("ecc",0).
       local sma is o("sma",b:radius+b:atm:height+10000).
       set a to sma*(1-ecc)-b:radius.

@@ -4,14 +4,15 @@
   local cmds is Lex().
   {
     local map is Lex(
-      "atv","p/07 03.ks",
       "nop","p/07 00.ks",
       "lch","p/07 01.ks",
+      "stg","p/07 02.ks",
+      "vsl","p/07 03.ks",
+      "typ","p/07 04.ks",
       "om1","p/07 21.ks",
       "om2","p/07 22.ks",
       "om3","p/07 23.ks",
       "om4","p/07 24.ks",
-      "stg","p/07 02.ks",
       "tm1","p/07 41.ks",
       "tm2","p/07 42.ks",
       "tm3","p/07 43.ks"
@@ -21,17 +22,18 @@
       if not cmds:hasKey(cmd)set cmds[cmd]to g00_02(map[cmd]).
     }
   }
-  local rst is g00_02("p/fd 21.ks").
-  local wf is g00_02("p/fd 24.ks").
-  local rf is g00_02("p/fd 25.ks").
+  local _fd21 is g00_02("p/fd 21.ks").
+  local _fd24 is g00_02("p/fd 24.ks").
+  local _fd25 is g00_02("p/fd 25.ks").
   g00_01({
-    local i is rf(f,0).
+    local i is _fd25(f,0).
     until i>=ml:length{
+      wait until ship=kUniverse:activeVessel.
       local m is ml[i].
       cmds[m["cmd"]](m).
       set i to i+1.
-      wf(f,i). 
-      rst().
+      _fd24(f,i). 
+      _fd21().
     }
     //reboot.
   }).

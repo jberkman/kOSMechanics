@@ -12,7 +12,7 @@
       local o is _fd19:bind(g("obt",Lex())).
       local b is o("bdy",Kerbin).
       pgm(_030a,List(b,0),g("idl",{})).
-      pgm(_0301,List(next@,1)).
+      pgm(_0301,List(next@,g("wrp",1))).
     })().
   }).
 }

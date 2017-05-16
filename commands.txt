@@ -59,6 +59,7 @@ g02_03 horizontal heading
 04 06 capture burn
 04 07 impact mid-course correction
                             body, err()
+04 08 impact correction     body
 
 // Landing Manoeuvres
 05 01 deorbit
@@ -70,9 +71,11 @@ g02_03 horizontal heading
 
 // Mission Commands
 07 00 (nop) no-op           params (idl)
-07 01 (lch) launch          params (prt [pitch rate], per [peer], phs [phase], rpa [raise peri], obt: {inc, lan, sma, ecc})
+07 01 (lch) launch          params (prt: pitch rate, per: peer, phs: phase, rpa: raise peri, obt: {inc, lan, sma, ecc})
 07 02 (stg) stage
-07 03 (atv) wait until active
+07 03 (vsl) set active vessel
+                            params (vsl)
+07 04 (typ) set vessel type params (typ)
 
 07 21 (om1) circ @ apo      params (idl)
 07 22 (om2) stabilize orbit params (idl)
