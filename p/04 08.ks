@@ -12,7 +12,7 @@
     set target to b.
     if _fd15(obt,b)and _fd16(obt,b):periapsis<0 return. 
     local h is _fd0f().
-    h["add"](b:radius,_fd1c(b,{parameter o.
+    h["add"](b:radius/2,_fd1c(b,{parameter o.
       //print "peri: "+o:periapsis+" ("+(o:periapsis+b:radius)+")".
       return o:periapsis+b:radius.
     })).
