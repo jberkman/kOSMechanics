@@ -9,10 +9,11 @@
 # Run this file while being in your scripts directory. Please make a separate directory called "packed" - this
 # is where your modified scripts will go.
 set -ex
-mkdir -p packed/{boot,m,p}
-for file in $(find boot m p -type f); do
+find boot m p -type f | while read file; do
     echo "$file"
-    if [ "${file##*.}" -eq "ks" ]; then
+    dir=$(dirname "$file")
+    mkdir -p "packed/$dir"
+    if [[ "${file##*.}" = "ks" ]]; then
         # the first line strips comments
         # the second line strips leading whitespace
         # the third line strips trailing whitespace
