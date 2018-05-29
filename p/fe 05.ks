@@ -15,7 +15,8 @@
       "om4","p/07 24.ks",
       "tm1","p/07 41.ks",
       "tm2","p/07 42.ks",
-      "tm3","p/07 43.ks"
+      "tm3","p/07 43.ks",
+      "tm4","p/07 44.ks"
     ).
     for m in ml{
       local cmd is m["cmd"].

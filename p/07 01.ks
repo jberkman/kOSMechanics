@@ -6,10 +6,10 @@
   local _0201 is g00_02("p/02 01.ks").
   local _0202 is g00_02("p/02 02.ks").
   local _0203 is g00_02("p/02 03.ks").
-  local _0204 is g00_02("p/02 04.ks").
   local _0205 is g00_02("p/02 05.ks").
   //local _0206 is g00_02("p/02 06.ks").
   local _0208 is g00_02("p/02 08.ks").
+  local _0209 is g00_02("p/02 09.ks").
   local _0301 is g00_02("p/03 01.ks").
   local _0304 is g00_02("p/03 04.ks").
   local _030a is g00_02("p/03 0a.ks").
@@ -56,8 +56,8 @@
       pgm(_0201@).
       pgm(_0202@,List(i,p)).
       pgm(_0203@,List(a)).
-      pgm(_0208@,List(a,i)).
-      pgm(_0204@,List(a,i)).
+      //pgm(_0208@,List(a,i)).
+      pgm(_0209@,List(a,i)).
       pgm(_0205@).
       //if g("rpa",0){
       //  pgm(_0206@,List(a)).

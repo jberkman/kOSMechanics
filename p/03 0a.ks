@@ -5,7 +5,7 @@
   local xfer is g00_02("p/fd 15.ks").
   local approach is g00_02("p/fd 17.ks").
   local dv is g00_02("p/fd 0e.ks").
-  g00_01({parameter pr,th.
+  g00_01({parameter pr,th is 0.
     g00_03("PGM 03 0A").
     set target to pr.
     local h is hal().

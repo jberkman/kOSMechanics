@@ -30,6 +30,7 @@ g00_03 hlog
 02 06 periapsis boost       periapsis
 02 07 stage
 02 08 inclination adj.      periapsis, inclination
+02 09 ex-atmo flight        periapsis, apoapsis, inclination
 
 // Launch globals
 g02_01 pitch timer          seconds
@@ -47,8 +48,10 @@ g02_03 horizontal heading
 03 07 ensure stable orbit
 03 08 adj arg of peri       height, aop
 03 09 equitorial orbit
-03 0a transfer to peer      peer, phase angle
+03 0a transfer to peer      peer, [phase angle]
 03 0b fine-adjust SMA       SMA
+03 0c transfer to parent peer
+                            body
 
 // Transfer Manoeuvres
 04 01 transfer to body      body
@@ -90,6 +93,15 @@ g02_03 horizontal heading
                             params (idl, obt: {bdy, inc, sma})
 07 43 (tm3) transfer to impact
                             params (idl, obt: {bdy})
+07 44 (tm4) transfer to sibling
+                            params (idl, obt: {bdy})
+
+// Shuttle GN&C-based Routines
+// mode params (* = skipped)
+// 1*   [ t_c*, t_b_i*, dV_OMS*, a_L*, i__y, r__d, r_d, v_d, gamma_d, K_1* ]
+// 1    [ i__y, r__d, r_d, v_d, gamma_d ]
+// 08 00 Run GN&C           mode, params
+
 
 // Library subroutines
 fd 01 fnapply               function, List(arguments).
